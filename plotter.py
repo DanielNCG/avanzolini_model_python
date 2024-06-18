@@ -12,18 +12,18 @@ class Plotter:
                                          init_conds["Graph time range (s)"])))
         self.obj = obj
         self.names = [
-            "Aortic Pressure (mmHg) vs Time (s)",
-            "Blood Flow in Arterial Systemic Circulation (cm³/s) vs Time (s)",
-            "Systemic Pressure (mmHg) vs Time (s)",
-            "Blood Flow in Venous Systemic Circulation (cm³/s) vs Time (s)",
-            "Right Venous-atrial Pressure (mmHg) vs Time (s)",
-            "Right Ventricle Volume (cm³) vs Time (s)",
-            "Pulmonary Venous Pressure (mmHg) vs Time (s)",
-            "Blood Flow in Arterial Pulmonary Circulation (cm³/s) vs Time (s)",
-            "Pulmonary Pressure (mmHg) vs Time (s)",
-            "Blood Flow in Venous Pulmonary Circulation (cm³/s) vs Time (s)",
-            "Left Venous-atrial Pressure (mmHg) vs Time (s)",
-            "Left Ventricle Volume (cm³) vs Time (s)",
+            "Aortic Pressure (mmHg) x Time (s)",
+            "Blood Flow in Arterial Systemic Circulation (cm³/s) x Time (s)",
+            "Systemic Pressure (mmHg) x Time (s)",
+            "Blood Flow in Venous Systemic Circulation (cm³/s) x Time (s)",
+            "Right Venous-atrial Pressure (mmHg) x Time (s)",
+            "Right Ventricle Volume (cm³) x Time (s)",
+            "Pulmonary Venous Pressure (mmHg) x Time (s)",
+            "Blood Flow in Arterial Pulmonary Circulation (cm³/s) x Time (s)",
+            "Pulmonary Pressure (mmHg) x Time (s)",
+            "Blood Flow in Venous Pulmonary Circulation (cm³/s) x Time (s)",
+            "Left Venous-atrial Pressure (mmHg) x Time (s)",
+            "Left Ventricle Volume (cm³) x Time (s)",
         ]
         self.file_names = [
             f"./graphs/aortic_pressure.png",
@@ -40,18 +40,18 @@ class Plotter:
             f"./graphs/left_volume.png"
         ]
         self.labels = [
-            "Pressure (mmHg)",
-            "Blood Flow (cm³/s)",
-            "Pressure (mmHg)",
-            "Blood Flow (cm³/s)",
-            "Pressure (mmHg)",
-            "Volume (cm³)",
-            "Pressure (mmHg)",
-            "Blood Flow (cm³/s)",
-            "Pressure (mmHg)",
-            "Blood Flow (cm³/s)",
-            "Pressure (mmHg)",
-            "Volume (cm³)"
+            "Aortic Pressure (mmHg)",
+            "Blood Flow in Arterial Systemic Circulation (cm³/s)",
+            "Systemic Pressure (mmHg)",
+            "Blood Flow in Venous Systemic Circulation (cm³/s)",
+            "Right Venous-atrial Pressure (mmHg)",
+            "Right Ventricle Volume (cm³)",
+            "Pulmonary Venous Pressure (mmHg)",
+            "Blood Flow in Arterial Pulmonary Circulation (cm³/s)",
+            "Pulmonary Pressure (mmHg)",
+            "Blood Flow in Venous Pulmonary Circulation (cm³/s)",
+            "Left Venous-atrial Pressure (mmHg)",
+            "Left Ventricle Volume (cm³)"
         ]
 
     def plot_loops(self):
@@ -72,8 +72,9 @@ class Plotter:
         mpl.xlabel("Volume (cm³)")
         mpl.savefig(f"./graphs/pv_diagram_left.png", transparent=False, dpi="figure", format="png")
         mpl.clf()
-        mpl.plot(self.x[5], pressure_right)
-        mpl.plot(self.x[11], pressure_left)
+        mpl.plot(self.x[5], pressure_right, label="Right Ventricle")
+        mpl.plot(self.x[11], pressure_left, label="Left Ventricle")
+        mpl.legend(loc="upper right")
         mpl.title("PV diagram for both ventricles")
         mpl.ylabel("Pressure (mmHg)")
         mpl.xlabel("Volume (cm³)")
@@ -91,17 +92,21 @@ class Plotter:
     def plot_time_graph_all(self):
 
         for i in range(0, 10, 2):
-            mpl.plot(self.t[self.index], self.x[i][self.index])
+            mpl.plot(self.t[self.index], self.x[i][self.index], label=self.labels[i])
+        mpl.title("Pressures (mmHg) x Time (s)")
         mpl.ylabel("Pressure (mmHg)")
         mpl.xlabel("Time (s)")
+        mpl.legend(loc="upper right")
         mpl.savefig(f"./graphs/all_pressures.png", transparent=False, dpi="figure", format="png")
         mpl.clf()
 
         for i in range(12):
             if np.mod(i, 2) != 0 and i != 5 and i != 11:
-                mpl.plot(self.t[self.index], self.x[i][self.index])
+                mpl.plot(self.t[self.index], self.x[i][self.index], label=self.labels[i])
+        mpl.title("Blood Flows (cm³/s) x Time (s)")
         mpl.ylabel("Blood Flow (cm³/s)")
         mpl.xlabel("Time (s)")
+        mpl.legend(loc="upper right")
         mpl.savefig(f"./graphs/all_flows.png", transparent=False, dpi="figure", format="png")
         mpl.clf()
 
