@@ -33,6 +33,7 @@ class Model:
         self.tc = float(params["Cardiac period (s)"])
         self.ti = float(init_cond["Simulation initial instant (s)"])
         self.tf = float(init_cond["Simulation final instant (s)"])
+        self.reflux = float(params["Aortic reflux (%)"])
         self.x = [
             float(init_cond["Initial Aortic Pressure (mmHg)"]),
             float(init_cond["Initial Blood Flow in Arterial Systemic Circulation (cm³/s)"]),
@@ -80,7 +81,7 @@ class Model:
         delta_p2 = x5 - self.pressure_right_ventricle(t) - x6 * self.elastance_right_ventricle(t)
         delta_p3 = self.pressure_right_ventricle(t) + x6 * self.elastance_right_ventricle(t) - x7
         delta_p4 = x11 - self.pressure_left_ventricle(t) - x12 * self.elastance_left_ventricle(t)
-        s1 = delta_p1 > 0
+        s1 = (delta_p1 > 0) - self.reflux
         s2 = delta_p2 > 0
         s3 = delta_p3 > 0
         s4 = delta_p4 > 0

@@ -25,5 +25,6 @@ params = {
     "Mitral valve resistance (mmHg s cm3)": 3.751e-03,
     "Left myo. viscosity resistance (mmHg s cm3)": 8.000e-02,
     "Right myo. viscosity resistance (mmHg s cm3)": 1.750e-02,
+    "Aortic reflux (%)": 0,
     "Cardiac period (s)": 0.8
 }
