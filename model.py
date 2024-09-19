@@ -1,8 +1,10 @@
 import numpy as np
+# In this file is the definition of the Model class in which is the cardiovascular model.
 
 
 class Model:
 
+    # Defining the parameters and initial conditions
     def __init__(self, params, init_cond):
         self.c1 = float(params["Aortic compliance (mmHg1 cm3)"])
         self.c2 = float(params["Arterial systemic compliance (mmHg1 cm3)"])
@@ -49,34 +51,42 @@ class Model:
             float(init_cond["Initial Left Ventricle Volume (cm³)"])
         ]
 
+    # Defining a method that returns the time span tuple required by the Scipy.Integrate PVI solver.
     def get_time_span(self):
         span = (self.ti, self.tf)
         return span
 
+    # Defining the activation function that represents the cardiac cycle in the model.
     def activation(self, t):
         ts = 0.16 + 0.3 * self.tc
         tm = np.mod(t, self.tc)
         a = (tm < ts) * ((1 - np.cos(2 * np.pi * tm / ts)) / 2)
         return a
 
+    # Defining a method that returns the pressure in the right ventricle at any given time.
     def pressure_right_ventricle(self, t):
         pr = self.p0r * self.activation(t)
         return pr
 
+    # Defining a method that returns the pressure in the left ventricle at any given time.
     def pressure_left_ventricle(self, t):
         pl = self.p0l * self.activation(t)
         return pl
 
+    # Defining a method that returns the right ventricle's elastance at any given time.
     def elastance_right_ventricle(self, t):
         er = self.ed_r + self.es_r * self.activation(t)
         return er
 
+    # Defining a method that returns the left ventricle's elastance at any given time.
     def elastance_left_ventricle(self, t):
         el = self.ed_l + self.es_l * self.activation(t)
         return el
 
+    # The following method returns the 12 coupled differential equations that describes the cardiovascular model.
     def get(self, t, y):
         x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12 = y
+        # This block of code defines the functions that govern the heart valves, represented by the diodes in the model.
         delta_p1 = self.pressure_left_ventricle(t) + x12 * self.elastance_left_ventricle(t) - x1
         delta_p2 = x5 - self.pressure_right_ventricle(t) - x6 * self.elastance_right_ventricle(t)
         delta_p3 = self.pressure_right_ventricle(t) + x6 * self.elastance_right_ventricle(t) - x7
@@ -86,6 +96,7 @@ class Model:
         s3 = delta_p3 > 0
         s4 = delta_p4 > 0
 
+        # The 12 differential equations are then laid out explicitly and then returned by the function get().
         dx1_dt = (1 / self.c1) * (s1 * delta_p1 / (self.rl + self.r1) - x2)
         dx2_dt = (1 / self.l1) * (x1 - self.r2 * x2 - x3)
         dx3_dt = (1 / self.c2) * (x2 - x4)

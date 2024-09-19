@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc194203-92a0-4fe6-bc3d-40a09e6495b6" name="Changes" comment="Legend is now beautiful :D">
+    <list default="true" id="fc194203-92a0-4fe6-bc3d-40a09e6495b6" name="Changes" comment="Updated parameters and model to simulate aortic insufficiency">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/initial_conditions.py" beforeDir="false" afterPath="$PROJECT_DIR$/initial_conditions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/parameters.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,7 +100,15 @@
       <option name="project" value="LOCAL" />
       <updated>1719374872312</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Updated parameters and model to simulate aortic insufficiency">
+      <option name="closed" value="true" />
+      <created>1722556553667</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1722556553667</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -131,6 +142,7 @@
     <MESSAGE value="Added legends to the multiple grpahs" />
     <MESSAGE value="Variables' names changed." />
     <MESSAGE value="Legend is now beautiful :D" />
-    <option name="LAST_COMMIT_MESSAGE" value="Legend is now beautiful :D" />
+    <MESSAGE value="Updated parameters and model to simulate aortic insufficiency" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated parameters and model to simulate aortic insufficiency" />
   </component>
 </project>

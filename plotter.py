@@ -1,16 +1,20 @@
 import numpy as np
 import matplotlib.pyplot as mpl
+# In this file is the definition of the Plotter class. This class uses the data provided by the simulation and plots all
+# the graphs via the MatPlotLib library.
 
 
 class Plotter:
 
     def __init__(self, init_conds, sol, obj):
+        # Defining the plot parameters.
         self.t = sol.t
         self.x = sol.y
         self.index = np.where((sol.t >= init_conds["Simulation initial instant (s)"]) &
                               (sol.t <= (init_conds["Simulation initial instant (s)"] +
                                          init_conds["Graph time range (s)"])))
         self.obj = obj
+        # Giving names to all graphs plotted.
         self.names = [
             "Aortic Pressure (mmHg) x Time (s)",
             "Blood Flow in Arterial Systemic Circulation (cm³/s) x Time (s)",
@@ -39,6 +43,7 @@ class Plotter:
             f"./graphs/left_venousatrial_pressure.png",
             f"./graphs/left_volume.png"
         ]
+        # Giving labels to each variable.
         self.labels = [
             "Aortic",
             "Arterial Systemic Circulation",
@@ -54,6 +59,7 @@ class Plotter:
             "Left Ventricle"
         ]
 
+    # This method plots all the P-V diagrams.
     def plot_loops(self):
         pressure_right = []
         pressure_left = []
@@ -82,6 +88,7 @@ class Plotter:
                     bbox_inches='tight')
         mpl.clf()
 
+    # This method plots the graph of the specified variable in relation to time.
     def plot_time_graph(self, i):
         mpl.plot(self.t[self.index], self.x[i][self.index])
         mpl.title(self.names[i])
@@ -90,8 +97,12 @@ class Plotter:
         mpl.savefig(self.file_names[i], transparent=False, dpi="figure", format="png")
         mpl.clf()
 
+    # The plot_time_graph_all() method plots 2 graphs: the first is a graph of all pressures by time and the second
+    # is a graph of all blood flows by time.
     def plot_time_graph_all(self):
 
+        # In the following code block, there's a for loop that runs over all the even index variables (pressures).
+        # Those variables are then plotted in the same graph in order to better visualize the data.
         for i in range(0, 10, 2):
             mpl.plot(self.t[self.index], self.x[i][self.index], label=self.labels[i])
         mpl.title("Pressures (mmHg) x Time (s)")
@@ -102,6 +113,8 @@ class Plotter:
                     bbox_inches='tight')
         mpl.clf()
 
+        # In the following code block, there's a for loop that runs over all variables.
+        # Then, odd index variables (blood flow), except x5 and x11 (volumes) are plotted in the same graph.
         for i in range(12):
             if np.mod(i, 2) != 0 and i != 5 and i != 11:
                 mpl.plot(self.t[self.index], self.x[i][self.index], label=self.labels[i])
@@ -113,6 +126,9 @@ class Plotter:
                     bbox_inches='tight')
         mpl.clf()
 
+    # The plot_all() function calls the plot_loops() and plot_time_graph_all() functions, generating its respective
+    # graphs. After that, a for loop runs over all the variables to plot each one in respect to time using the
+    # plot_time_graph() method.
     def plot_all(self):
         self.plot_loops()
         self.plot_time_graph_all()

@@ -1,3 +1,5 @@
+# This file contains a dictionary in which are the parameters for the simulation.
+
 params = {
     "Aortic compliance (mmHg1 cm3)": 0.220,
     "Arterial systemic compliance (mmHg1 cm3)": 1.460,

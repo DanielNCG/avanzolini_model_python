@@ -1,3 +1,5 @@
+# This file contains a dictionary in which are the initial conditions for the simulation.
+
 initial_conditions = {
     "Initial Aortic Pressure (mmHg)": 71.112,
     "Initial Blood Flow in Arterial Systemic Circulation (cm³/s)": 8.880,
