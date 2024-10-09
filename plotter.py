@@ -7,6 +7,8 @@ import matplotlib.pyplot as mpl
 class Plotter:
 
     def __init__(self, init_conds, sol, obj):
+        # Setting the font size
+        mpl.rcParams.update({'font.size': 22})
         # Defining the plot parameters.
         self.t = sol.t
         self.x = sol.y
@@ -46,15 +48,15 @@ class Plotter:
         # Giving labels to each variable.
         self.labels = [
             "Aortic",
-            "Arterial Systemic Circulation",
+            "Arterial Systemic",
             "Systemic",
-            "Venous Systemic Circulation",
-            "Venous-atrial Pressure",
+            "Venous Systemic",
+            "Venous-atrial",
             "Right Ventricle",
             "Pulmonary Venous",
-            "Arterial Pulmonary Circulation",
+            "Arterial Pulmonary",
             "Pulmonary",
-            "Venous Pulmonary Circulation",
+            "Venous Pulmonary",
             "Left Venous-atrial",
             "Left Ventricle"
         ]
@@ -67,34 +69,37 @@ class Plotter:
             pressure_right.append(self.obj.pressure_right_ventricle(t))
             pressure_left.append(self.obj.pressure_left_ventricle(t))
         mpl.plot(self.x[5], pressure_right)
-        mpl.title("PV diagram for the right ventricle")
-        mpl.ylabel("Pressure (mmHg)")
-        mpl.xlabel("Volume (cm³)")
-        mpl.savefig(f"./graphs/pv_diagram_right.png", transparent=False, dpi="figure", format="png")
+        mpl.ylabel("Pressure [mmHg]")
+        mpl.xlabel("Volume [cm³]")
+        mpl.savefig(f"./graphs/pv_diagram_right.png", transparent=False, dpi=1000, format="png")
         mpl.clf()
         mpl.plot(self.x[11], pressure_left)
-        mpl.title("PV diagram for the left ventricle")
-        mpl.ylabel("Pressure (mmHg)")
-        mpl.xlabel("Volume (cm³)")
-        mpl.savefig(f"./graphs/pv_diagram_left.png", transparent=False, dpi="figure", format="png")
+        mpl.ylabel("Pressure [mmHg]")
+        mpl.xlabel("Volume [cm³]")
+        mpl.savefig(f"./graphs/pv_diagram_left.png", transparent=False, dpi=1000, format="png")
         mpl.clf()
         mpl.plot(self.x[5], pressure_right, label=self.labels[5])
         mpl.plot(self.x[11], pressure_left, label=self.labels[11])
         mpl.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-        mpl.title("PV diagram for both ventricles")
-        mpl.ylabel("Pressure (mmHg)")
-        mpl.xlabel("Volume (cm³)")
-        mpl.savefig(f"./graphs/pv_diagram_both.png", transparent=False, dpi="figure", format="png",
+        mpl.ylabel("Pressure [mmHg]")
+        mpl.xlabel("Volume [cm³]")
+        mpl.savefig(f"./graphs/pv_diagram_both.png", transparent=False, dpi=1000, format="png",
                     bbox_inches='tight')
         mpl.clf()
 
     # This method plots the graph of the specified variable in relation to time.
     def plot_time_graph(self, i):
         mpl.plot(self.t[self.index], self.x[i][self.index])
-        mpl.title(self.names[i])
-        mpl.ylabel(self.labels[i])
-        mpl.xlabel("Time (s)")
-        mpl.savefig(self.file_names[i], transparent=False, dpi="figure", format="png")
+        if np.mod(i, 2) == 0:
+            mpl.ylabel("Pressure [mmHg]")
+        else:
+            if i == 11 or i == 5:
+                mpl.ylabel("Volume [cm³]")
+            else:
+                mpl.ylabel("Flow [cm³/s]")
+        mpl.xlabel("Time [s]")
+        mpl.savefig(self.file_names[i], transparent=False, dpi=1000, format="png",
+                    bbox_inches='tight')
         mpl.clf()
 
     # The plot_time_graph_all() method plots 2 graphs: the first is a graph of all pressures by time and the second
@@ -105,11 +110,10 @@ class Plotter:
         # Those variables are then plotted in the same graph in order to better visualize the data.
         for i in range(0, 10, 2):
             mpl.plot(self.t[self.index], self.x[i][self.index], label=self.labels[i])
-        mpl.title("Pressures (mmHg) x Time (s)")
-        mpl.ylabel("Pressure (mmHg)")
-        mpl.xlabel("Time (s)")
+        mpl.ylabel("Pressure [mmHg]")
+        mpl.xlabel("Time [s]")
         mpl.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-        mpl.savefig(f"./graphs/all_pressures.png", transparent=False, dpi="figure", format="png",
+        mpl.savefig(f"./graphs/all_pressures.png", transparent=False, dpi=1000, format="png",
                     bbox_inches='tight')
         mpl.clf()
 
@@ -118,11 +122,10 @@ class Plotter:
         for i in range(12):
             if np.mod(i, 2) != 0 and i != 5 and i != 11:
                 mpl.plot(self.t[self.index], self.x[i][self.index], label=self.labels[i])
-        mpl.title("Blood Flows (cm³/s) x Time (s)")
-        mpl.ylabel("Blood Flow (cm³/s)")
-        mpl.xlabel("Time (s)")
+        mpl.ylabel("Flow [cm³/s]")
+        mpl.xlabel("Time [s]")
         mpl.legend(loc='center left', bbox_to_anchor=(1, 0.5))
-        mpl.savefig(f"./graphs/all_flows.png", transparent=False, dpi="figure", format="png",
+        mpl.savefig(f"./graphs/all_flows.png", transparent=False, dpi=1000, format="png",
                     bbox_inches='tight')
         mpl.clf()
 

@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc194203-92a0-4fe6-bc3d-40a09e6495b6" name="Changes" comment="Updated parameters and model to simulate aortic insufficiency">
+    <list default="true" id="fc194203-92a0-4fe6-bc3d-40a09e6495b6" name="Changes" comment="code comented">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/initial_conditions.py" beforeDir="false" afterPath="$PROJECT_DIR$/initial_conditions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model.py" beforeDir="false" afterPath="$PROJECT_DIR$/model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parameters.py" beforeDir="false" afterPath="$PROJECT_DIR$/parameters.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/plotter.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -108,7 +104,15 @@
       <option name="project" value="LOCAL" />
       <updated>1722556553667</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="code comented">
+      <option name="closed" value="true" />
+      <created>1726707607030</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1726707607030</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -143,6 +147,7 @@
     <MESSAGE value="Variables' names changed." />
     <MESSAGE value="Legend is now beautiful :D" />
     <MESSAGE value="Updated parameters and model to simulate aortic insufficiency" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated parameters and model to simulate aortic insufficiency" />
+    <MESSAGE value="code comented" />
+    <option name="LAST_COMMIT_MESSAGE" value="code comented" />
   </component>
 </project>
