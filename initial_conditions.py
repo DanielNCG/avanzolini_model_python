@@ -15,5 +15,6 @@ initial_conditions = {
     "Initial Left Ventricle Volume (cm³)": 112.760,
     "Simulation initial instant (s)": 0,
     "Simulation final instant (s)": 180,
+    "Number of points in simulation": 297152,
     "Graph time range (s)": 1.8
 }

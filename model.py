@@ -36,6 +36,7 @@ class Model:
         self.ti = float(init_cond["Simulation initial instant (s)"])
         self.tf = float(init_cond["Simulation final instant (s)"])
         self.reflux = float(params["Aortic reflux (%)"])
+        self.number_of_points = int(init_cond["Number of points in simulation"])
         self.x = [
             float(init_cond["Initial Aortic Pressure (mmHg)"]),
             float(init_cond["Initial Blood Flow in Arterial Systemic Circulation (cm³/s)"]),
@@ -51,9 +52,13 @@ class Model:
             float(init_cond["Initial Left Ventricle Volume (cm³)"])
         ]
 
-    # Defining a method that returns the time span tuple required by the Scipy.Integrate PVI solver.
+    # Defining a method that returns the time span required by the Scipy.Integrate PVI solver.
     def get_time_span(self):
         span = (self.ti, self.tf)
+        return span
+
+    def get_time_eval(self):
+        span = np.linspace(self.ti, self.tf, self.number_of_points)
         return span
 
     # Defining the activation function that represents the cardiac cycle in the model.
